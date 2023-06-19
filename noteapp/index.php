@@ -6,7 +6,7 @@ if(isset($_POST['signin']))
 	$email=$_POST['email'];
 	$password=md5($_POST['password']);
 
-	$sql ="SELECT * FROM register where email ='$email' AND password ='$password'";
+	$sql ="SELECT * FROM user where email ='$email' AND password ='$password'";
 	$query= mysqli_query($conn, $sql);
 	$count = mysqli_num_rows($query);
 	if($count > 0)
@@ -31,7 +31,7 @@ if(isset($_POST['signup']))
 	$email=$_POST['email'];
 	$password=md5($_POST['password']);
 
-	$query = mysqli_query($conn,"select * from register where email = '$email'")or die(mysqli_error());
+	$query = mysqli_query($conn,"select * from user where email = '$email'")or die(mysqli_error());
 	$count = mysqli_num_rows($query);
 
 	if ($count > 0){ ?>
@@ -40,7 +40,7 @@ if(isset($_POST['signup']))
 	</script>
 	<?php
       }else{
-        mysqli_query($conn,"INSERT INTO register(fullName, email, password) VALUES('$name','$email','$password')         
+        mysqli_query($conn,"INSERT INTO user(fullName, email, password) VALUES('$name','$email','$password')         
 		") or die(mysqli_error()); ?>
 		<script>alert('Records Successfully  Added');</script>;
 		<script>
@@ -63,7 +63,6 @@ if(isset($_POST['signup']))
 </head>
 
 <body>
-	<input type="checkbox" id="checkbox">
 	<header class="header">
 		<h2 class="u-name">Notes <b>App</b></h2>
 	</header>

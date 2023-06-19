@@ -9,6 +9,11 @@ body {
   background-color: transparent;
   -webkit-font-smoothing: antialiased;
 }
+#myh4{
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-top: 10px;
+}
 .h1,
 .h2,
 .h3,
@@ -51,7 +56,9 @@ a:focus {
   padding: 2px 5px !important;
 }
 label {
-  font-weight: normal;
+  font-weight: bold;
+  padding: 5px 0;
+
 }
 .label-sm {
   padding-top: 0;
@@ -642,6 +649,10 @@ a:hover .caret-white {
   .aside-xxl {
     width: 450px;
   }
+  .aside-xxll {
+    width: 600px;
+  }
+
   .scrollable {
     -webkit-overflow-scrolling: touch;
   }

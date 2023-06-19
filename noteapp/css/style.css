@@ -70,7 +70,7 @@
 }
 
 .main {
-	height: 675px;
+	height: 660px;
 	background: url("../img/Background.jpg");
 	background-size: cover;
 	background-position: center;
@@ -109,7 +109,7 @@ input[type=text],
 input[type=Email],
 input[type=password] {
 	width: 100%;
-	margin: 8px 0;
+	margin: 12px 0;
 	padding: 12px 20px;
 	box-sizing: border-box;
 	background-color: #f1f1f1;
@@ -142,6 +142,7 @@ input[type=password]:focus {
 }
 
 .member {
+	margin-top: 5px;
 	padding: 16px;
 	font-size: 15px;
 	text-align: center;

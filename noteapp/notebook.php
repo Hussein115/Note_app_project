@@ -18,7 +18,7 @@ if (isset($_GET['delete'])) {
         $title=mysqli_real_escape_string($conn,$_POST['title']);
         $note=mysqli_real_escape_string($conn,$_POST['note']);
 
-        date_default_timezone_set("India/Kolkata");
+        date_default_timezone_set("Asia/Kolkata");
         $time_now = date("h:i:sa");
 
         // make sql query
@@ -80,7 +80,7 @@ if (isset($_GET['delete'])) {
       </div>
       <ul class="nav navbar-nav navbar-right m-n hidden-xs nav-user">
         <li class="dropdown">
-          <?php $query= mysqli_query($conn,"select * from register where user_ID = '$session_id'")or die(mysqli_error());
+          <?php $query= mysqli_query($conn,"select * from user where user_ID = '$session_id'")or die(mysqli_error());
                 $row = mysqli_fetch_array($query);
             ?>
 
@@ -103,78 +103,38 @@ if (isset($_GET['delete'])) {
     <section>
       <section class="hbox stretch">
         <!-- .aside -->
-        <aside class="bg-dark lter aside-md hidden-print" id="nav">          
-          <section class="vbox">
-            <section class="w-f scrollable">
-              <div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="5px" data-color="#333333">
-                
-                <!-- nav -->
-                <nav class="nav-primary hidden-xs">
-                  <ul class="nav">
-                    <li  class="active">
-                      <a href="notebook.php" class="active">
-                        <i class="fa fa-pencil icon">
-                          <b class="bg-info"></b>
-                        </i>
-                        <span>Notes</span>
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
-                <!-- / nav -->
-              </div>
-            </section>
-            
-            <footer class="footer lt hidden-xs b-t b-dark">
-              <div id="invite" class="dropup">                
-                <section class="dropdown-menu on aside-md m-l-n">
-                  <section class="panel bg-white">
-                    <header class="panel-heading b-b b-light">
-                      <?php $query= mysqli_query($conn,"select * from register where user_ID = '$session_id'")or die(mysqli_error());
-                        $row = mysqli_fetch_array($query);
-                      ?>
-                      <?php echo $row['fullName']; ?> <i class="fa fa-circle text-success"></i>
-                    </header>
-                  </section>
-                </section>
-              </div>
-              <a href="#nav" data-toggle="class:nav-xs" class="pull-right btn btn-sm btn-dark btn-icon">
-                <i class="fa fa-angle-left text"></i>
-                <i class="fa fa-angle-right text-active"></i>
-              </a>
-            </footer>
-          </section>
-        </aside>
         <!-- /.aside -->
         <section id="content">
           <section class="hbox stretch">
-                  <aside class="aside-lg bg-light lter b-r">
+                  <aside class="aside-xxll bg-light dker b-r">
                     <div class="wrapper">
-                      <h4 class="m-t-none">Add Note</h4>
+                      <h4 class="m-t-none" id="myh4">Add Note</h4>
                       <form method="POST" id="myform" name="myform" >
                         <div class="form-group">
-                          <label>Title</label>
-                          <input name="title" type="text" placeholder="Title" class="input-sm form-control">
+                          <label >Title</label>
+                          <input name="title" type="text" placeholder="Title" class="input-bg form-control">
                         </div>
                         <div class="form-group">
                           <label>Note</label>
                           <textarea name="note" class="form-control" rows="8" data-minwords="8" data-required="true" placeholder="Take a Note ......"></textarea>
                         </div>
-                        <div class="m-t-lg"><button class="btn btn-sm btn-default" name="submit" type="submit">Submit</button></div>
+                        <div class="m-t-lg"><button class="btn btn-primary " name="submit" type="submit">Submit</button></div>
+
                       </form>
                     </div>
                 </aside>
+
                 <aside class="bg-white">
                   <section class="vbox">
                     <header class="header bg-light bg-gradient">
                       <ul class="nav nav-tabs nav-white">
-                        <li class="active"><a href="#activity" data-toggle="tab"><h4 style = "text-transform:uppercase;"><b> Your Notes</b></h4></a></li>
+                        <li class="active"><a href="#activity" data-toggle="tab"><h4 style = "text-transform:uppercase;"><b> My Notes</b></h4></a></li>
                       </ul>
                     </header>
                     <section class="scrollable">
                       <div class="tab-content">
                         <div class="tab-pane active" id="activity">
-                          <ul class="list-group no-radius m-b-none m-t-n-xxs list-group-lg no-border">
+                          <ul class="list-group no-radius m-b-none m-t-n-xxs list-group- no-border">
                             <li></li>
                             <?php foreach($notesArray as $note){ ?>
                             <li class="list-group-item">
@@ -189,48 +149,13 @@ if (isset($_GET['delete'])) {
                             </li>
                           </ul>
                         </div>
-                        <div class="tab-pane" id="events">
-                          <div class="text-center wrapper">
-                            <i class="fa fa-spinner fa fa-spin fa fa-large"></i>
-                          </div>
-                        </div>
-                        <div class="tab-pane" id="interaction">
-                          <div class="text-center wrapper">
-                            <i class="fa fa-spinner fa fa-spin fa fa-large"></i>
-                          </div>
-                        </div>
                       </div>
                     </section>
                   </section>
                 </aside>
-                <aside class="col-lg-4 b-l">
-                  <section class="vbox">
-                    <section class="scrollable">
-                      <div class="wrapper">
-                        <section class="panel panel-default">
-                          <?php
-                             $get_note = mysqli_query($conn,"select * from notes WHERE user_id = \"$session_id\" LIMIT 3") or die(mysqli_error());
-                             while ($row = mysqli_fetch_array($get_note)) {
-                             $id = $row['note_id'];
-                                 ?>
-                          <h4 style = "text-transform:uppercase;" class="font-thin padder"><b><?php echo $row['title']; ?></b></h4>
-                          <ul class="list-group">
-                            <li class="list-group-item">
-                                <p><?php echo $row['note']; ?> </p>
-                            </li>
-                          </ul>
-                          <?php } ?> 
-                        </section>
-                      </div>
-                    </section>
-                  </section>              
-                </aside>
           </section>
           <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a>
         </section>
-        <aside class="bg-light lter b-l aside-md hide" id="notes">
-          <div class="wrapper">Notification</div>
-        </aside>
       </section>
     </section>
   </section>

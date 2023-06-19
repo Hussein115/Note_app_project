@@ -68,7 +68,7 @@
       </div>
       <ul class="nav navbar-nav navbar-right m-n hidden-xs nav-user">
         <li class="dropdown">
-          <?php $query= mysqli_query($conn,"select * from register where user_ID = '$session_id'")or die(mysqli_error());
+          <?php $query= mysqli_query($conn,"select * from user where user_ID = '$session_id'")or die(mysqli_error());
                 $row = mysqli_fetch_array($query);
             ?>
 
@@ -91,60 +91,12 @@
     <section>
       <section class="hbox stretch">
         <!-- .aside -->
-        <aside class="bg-dark lter aside-md hidden-print" id="nav">          
-          <section class="vbox">
-            <section class="w-f scrollable">
-              <div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="5px" data-color="#333333">
-                
-                <!-- nav -->
-                <nav class="nav-primary hidden-xs">
-                  <ul class="nav">
-                    <li  class="active">
-                      <a href="notebook.php" class="active">
-                        <i class="fa fa-pencil icon">
-                          <b class="bg-info"></b>
-                        </i>
-                        <span>Notes</span>
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
-                <!-- / nav -->
-              </div>
-            </section>
-            
-            <footer class="footer lt hidden-xs b-t b-dark">
-              <div id="invite" class="dropup">                
-                <section class="dropdown-menu on aside-md m-l-n">
-                  <section class="panel bg-white">
-                    <header class="panel-heading b-b b-light">
-                      <?php $query= mysqli_query($conn,"select * from register where user_ID = '$session_id'")or die(mysqli_error());
-                        $row = mysqli_fetch_array($query);
-                      ?>
-                      <?php echo $row['fullName']; ?> <i class="fa fa-circle text-success"></i>
-                    </header>
-                    <div class="panel-body animated fadeInRight">
-                      <p><a href="https://www.youtube.com/channel/UCGnh6Xo-GhfNw4q7w9z1YxA/playlists" target="_blank" class="btn btn-sm btn-facebook"><i class="fa fa-fw fa-youtube"></i> Invite from Youtube</a></p>
-                    </div>
-                  </section>
-                </section>
-              </div>
-              <a href="#nav" data-toggle="class:nav-xs" class="pull-right btn btn-sm btn-dark btn-icon">
-                <i class="fa fa-angle-left text"></i>
-                <i class="fa fa-angle-right text-active"></i>
-              </a>
-              <div class="btn-group hidden-nav-xs">
-                <button type="button" title="Contacts" class="btn btn-icon btn-sm btn-dark" data-toggle="dropdown" data-target="#invite"><i class="fa fa-youtube"></i></button>
-              </div>
-            </footer>
-          </section>
-        </aside>
         <!-- /.aside -->
         <section id="content">
           <section class="hbox stretch">
-                  <aside class="aside-lg bg-light lter b-r">
+                  <aside class="aside-xxll bg-light dker b-r">
                     <div class="wrapper">
-                      <h4 class="m-t-none">Add Note</h4>
+                      <h4 class="m-t-none "id="myh4">Edit Note</h4>
                       <form method="POST">
                       	<?php
 						$query = mysqli_query($conn,"select * from notes where note_id = '$get_id' ")or die(mysqli_error());
@@ -152,13 +104,13 @@
 						?>
                         <div class="form-group">
                           <label>Title</label>
-                          <input name="title" type="text" placeholder="Title" class="input-sm form-control" value="<?php echo $row['title']; ?>">
+                          <input name="title" type="text" placeholder="Title" class="input-bg form-control" value="<?php echo $row['title']; ?>">
                         </div>
                         <div class="form-group">
                           <label>Note</label>
                           <textarea name="note" class="form-control" rows="8" data-minwords="8" data-required="true" placeholder="Take a Note ......"><?php echo $row['note']; ?></textarea>
                         </div>
-                        <div class="m-t-lg"><button class="btn btn-sm btn-default" name="update" type="submit">Update Note</button></div>
+                        <div class="m-t-lg"><button class="btn btn-primary " name="update" type="submit">Update Note</button></div>
                       </form>
                     </div>
                 </aside>
@@ -183,49 +135,12 @@
                             </li>
                           </ul>
                         </div>
-                        <div class="tab-pane" id="events">
-                          <div class="text-center wrapper">
-                            <i class="fa fa-spinner fa fa-spin fa fa-large"></i>
-                          </div>
-                        </div>
-                        <div class="tab-pane" id="interaction">
-                          <div class="text-center wrapper">
-                            <i class="fa fa-spinner fa fa-spin fa fa-large"></i>
-                          </div>
-                        </div>
                       </div>
                     </section>
                   </section>
-                </aside>
-                <aside class="col-lg-4 b-l">
-                  <section class="vbox">
-                    <section class="scrollable">
-                      <div class="wrapper">
-                        <section class="panel panel-default">
-                          <?php
-                             $get_note = mysqli_query($conn,"select * from notes WHERE note_id = \"$get_id\"") or die(mysqli_error());
-                             while ($row = mysqli_fetch_array($get_note)) {
-                             $id = $row['note_id'];
-                                 ?>
-                          <h4 style = "text-transform:uppercase;" class="font-thin padder"><b><?php echo $row['title']; ?></b></h4>
-                          <ul class="list-group">
-                            <li class="list-group-item">
-                                <p><?php echo $note['note']; ?></p>
-                                <small class="block text-muted text-info"><i class="fa fa-clock-o text-info"></i> <?php echo $note['time_in'] ?></small>
-                            </li>
-                          </ul>
-                          <?php } ?> 
-                        </section>
-                      </div>
-                    </section>
-                  </section>              
-                </aside>
+                </aside> 
           </section>
-          <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a>
         </section>
-        <aside class="bg-light lter b-l aside-md hide" id="notes">
-          <div class="wrapper">Notification</div>
-        </aside>
       </section>
     </section>
   </section>
